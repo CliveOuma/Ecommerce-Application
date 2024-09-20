@@ -3,3 +3,5 @@ node_modules/
 
 # Environment variable files
 .env
+.env.development
+.env.production
