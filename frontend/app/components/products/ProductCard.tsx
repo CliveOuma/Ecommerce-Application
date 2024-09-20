@@ -35,6 +35,7 @@ const ProductCard: React.FC<ProductCardProps> = ({ data }) => {
                         src={getCloudinaryUrl(data.images[0].public_id)}
                         alt={data.name}
                         fill
+                        sizes="(max-width: 640px) (max-width: 768px) (max-width: 1024px)"
                         className="object-contain"
                     />
                     ) : (
