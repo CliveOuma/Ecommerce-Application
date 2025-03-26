@@ -44,7 +44,7 @@ const SearchBar = () => {
                     className="text-2xl cursor-pointer"
                 />
             </div>
-            <div className={`absolute top-10  mx-8 w-full ${isSearchVisible ? 'block' : 'hidden'} lg:static
+            <div className={`absolute top-10 ml-10 px-6 w-full ${isSearchVisible ? 'block' : 'hidden'} lg:static
              lg:flex lg:items-center`}>
                 <div className="flex items-center border-gray-800 rounded-md justify-center lg:justify-start">
                     <input
@@ -58,7 +58,7 @@ const SearchBar = () => {
                     />
                     <button 
                         onClick={handleSubmit(onSubmit)} 
-                        className="bg-red-700 hover:opacity-80 text-white p-2 rounded-r-md"
+                        className="bg-gray-700 hover:opacity-80 text-white p-2 rounded-r-md"
                     >
                         Search
                     </button>

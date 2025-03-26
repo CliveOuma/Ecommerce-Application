@@ -11,61 +11,63 @@ import Loader from "@/app/components/Loader";
 import axios from "axios";
 import type { Product } from "@/Types";
 
-const Products = () => {
-  const { id } = useParams();
-  console.log("Product ID:", id);  // Check what is logged here
-
-  const [product, setProduct] = useState<Product | null>(null);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+const ProductPage = () => {
+  const { id } = useParams(); 
 
   useEffect(() => {
+      console.log("Product ID:", id);
+  }, [id]);
+  
+  if (!id) {
+      return <NullData title="Invalid Product ID" />;
+  }
+  
+
+  const [product, setProduct] = useState<Product | null>(null);
+const [loading, setLoading] = useState<boolean>(true);
+const [error, setError] = useState<string | null>(null);
+
+useEffect(() => {
     if (!id) {
-      setError("No product ID found");
-      setLoading(false);
-      return;
+        setLoading(false);
+        setError("Invalid Product ID");
+        return;
     }
 
     const fetchProduct = async () => {
-      try {
-        const response = await axios.get<Product>(
-          `${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`
-        );
-        setProduct(response.data);
-      } catch (error) {
-        console.error("Error fetching product data:", error);
-        setError("Failed to load product data.");
-      } finally {
-        setLoading(false);
-      }
+        try {
+            const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${id}`);
+            
+            if (response.status === 200) {
+                setProduct(response.data);
+            } else {
+                setError("Product not found");
+            }
+        } catch (error) {
+            console.error("Error fetching product:", error);
+            setError("Failed to load product.");
+        } finally {
+            setLoading(false);
+        }
     };
 
     fetchProduct();
-  }, [id]);
+}, [id]);
 
-  if (loading) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <Loader />
-      </div>
-    );
-  }
-
-  if (error || !product) {
-    return <NullData title={error || "Product not found"} />;
-  }
+if (loading) return <Loader />;
+if (error || !product) return <NullData title={error || "Product not found"} />;
 
   return (
-    <div className="p-8">
       <Container>
+      <div className="flex flex-col mt-8 gap-4">
         <ProductDetails product={product} />
-        <div className="flex flex-col mt-20 gap-4">
+        </div>
+        <div className="flex flex-col mt-8 gap-4">
           <AddRating product={product} />
           <ListRating product={product} />
         </div>
       </Container>
-    </div>
   );
 };
 
-export default Products;
+export default ProductPage;

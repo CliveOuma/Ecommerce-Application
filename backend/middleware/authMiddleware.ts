@@ -1,7 +1,6 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
 // Defining a type for the decoded token payload
 interface DecodedToken {
@@ -10,6 +9,10 @@ interface DecodedToken {
   iat: number;
   exp: number; 
 }
+
+const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
+
+
 
 export const requireAdmin = (req: Request, res: Response, next: NextFunction) => {
   const authHeader = req.headers.authorization;

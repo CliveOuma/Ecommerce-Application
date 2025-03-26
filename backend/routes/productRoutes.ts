@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { createProduct, updateProduct, deleteProduct, getProducts, getProductById }  from '../controllers/productController';
+import { createProduct, updateProduct, deleteProduct, getProducts, getProductById } from '../controllers/productController';
 import { requireAdmin } from '../middleware/authMiddleware';
 
 const router = Router();

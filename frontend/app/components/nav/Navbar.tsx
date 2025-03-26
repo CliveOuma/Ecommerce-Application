@@ -4,28 +4,23 @@ import Container from "../Container";
 import CartCount from "./CartCount";
 import UserMenu from "./UserMenu";
 import SearchBar from "../SearchBar";
-import ToggleMenu from "./ToggleMenu";
-import Categories from "./Categories";
 
 const Navbar = () => {
 
   return (
     <div>
-      <div className="py-2 border-b border-gray-200" >
+      <div className="p-2" >
         <Container>
-          <div className="flex items-center justify-between gap-3 md:gap-0">
+          <div className="flex items-center justify-between gap-6 md:gap-0">
             <Link href="/">e-buy</Link>
             <SearchBar />
-            <div className="flex items-center gap-8 md:gap-12">
+            <div className="flex items-center gap-8 md:gap-14">
               <CartCount />
               <UserMenu />
-              <ToggleMenu />
+              {/* <ToggleMenu/> */}
             </div>
           </div>
         </Container>
-      </div>
-      <div className="hidden md:block">
-        <Categories /> {/* Only show on larger devices */}
       </div>
     </div>
   );

@@ -11,8 +11,7 @@ import { Product } from '@/Types';
 
 interface ProductFormFields {
   name: string;
-  price: string; // Price can be a string, then parsed into a number
-  category: string;
+  price: string; 
   description: string;
 }
 
@@ -26,7 +25,6 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onProductUpdated }) 
     defaultValues: {
       name: product.name,
       price: product.price.toString(), 
-      category: product.category,
       description: product.description,
     },
   });
@@ -45,7 +43,6 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onProductUpdated }) 
       const response = await axios.put(`${process.env.NEXT_PUBLIC_API_URL}/api/products/${product._id}`, {
         name: data.name,
         price: parseFloat(data.price),
-        category: data.category,
         description: data.description,
       }, {
         headers: {
@@ -91,14 +88,6 @@ const EditProduct: React.FC<EditProductProps> = ({ product, onProductUpdated }) 
           register={register}
           errors={errors}
           type="number"
-          required
-        />
-        <Input
-          id="category"
-          label="Category"
-          disabled={isLoading}
-          register={register}
-          errors={errors}
           required
         />
         <TextArea

@@ -16,7 +16,7 @@ const ManageOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        setError(null); // Clear previous error state
+        setError(null); 
         const response = await axios.get(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`);
         console.log(response.data);
         setOrders(response.data);

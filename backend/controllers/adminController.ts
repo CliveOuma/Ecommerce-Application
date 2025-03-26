@@ -1,10 +1,11 @@
 import { Request, Response } from 'express';
 import { Order } from '../models/order';
 import User from '../models/user';
+import { Product } from '../models/product';
 
 export const getOrderSummary = async (req: Request, res: Response) => {
   try {
-    const orders = await Order.find();  // Fetch all orders
+    const orders = await Order.find();  
 
     const totalOrders = orders.length;
 
@@ -35,3 +36,12 @@ export const getUserCount = async (req: Request, res: Response) => {
   }
 };
 
+export const getProductCount = async (req: Request, res: Response) => {
+  try {
+    const productCount = await Product.countDocuments();
+    res.status(200).json({ count: productCount });
+  } catch (error) {
+    console.error('Error fetching product count:', error);
+    res.status(500).json({ message: 'Error fetching product count' });
+  }
+};

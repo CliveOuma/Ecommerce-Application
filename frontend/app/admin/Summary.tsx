@@ -40,8 +40,6 @@ const Summary: React.FC<SummaryProps> = () => {
             digit: 0,
         },
     });
-
-    // Fetch data from the backend API
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -62,8 +60,6 @@ const Summary: React.FC<SummaryProps> = () => {
                     tempData.orders.digit = ordersSummary.totalOrders;
                     tempData.paidOrders.digit = ordersSummary.paidOrders;
                     tempData.unpaidOrders.digit = ordersSummary.unpaidOrders;
-    
-                    // Ensure the count property is correctly accessed
                     tempData.products.digit = productsCount.count || 0;
                     tempData.users.digit = usersCount.count || 0;
     

@@ -2,7 +2,7 @@
 import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { useRouter } from 'next/navigation';
 import jwt from 'jsonwebtoken';
-import { User } from '@/Types'; // Import correct User type
+import { User } from '@/Types';
 
 interface UserContextProps {
   user: User | null;

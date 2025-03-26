@@ -1,18 +1,22 @@
 import Image from "next/image";
-import { CartProductType } from "../product/[id]/ProductDetails";
 
 interface ProductImageProps {
-    cartProduct: CartProductType,
+    cartProduct: any;
 }
 
 const ProductImage: React.FC<ProductImageProps> = ({ cartProduct }) => {
-    return ( 
-        <div className="h-full max-h-[500px] min-h-[300px] sm:min-h-[400px] gap-2 grid grid-cols-6">
-            <div className="col-span-6 aspect-square relative">
-                <Image src={cartProduct.selectedImg.image} alt={cartProduct.name} fill className="w-full object-contain h-full" />
-            </div>
+
+    return (
+        <div className="w-full max-w-[400px]">
+            <Image
+                src={cartProduct?.selectedImg?.image}
+                alt={cartProduct?.name || "Product Image"}
+                width={400}
+                height={400}
+                className="object-cover rounded-lg"
+            />
         </div>
-     );
-}
- 
+    );
+};
+
 export default ProductImage;

@@ -9,7 +9,6 @@ const Cart = () => {
   return (
     <div className="pt-8">
       <Container>
-        {/* Wrap CartClient with Suspense */}
         <Suspense fallback={<Loader/>}>
           <CartClient />
         </Suspense>

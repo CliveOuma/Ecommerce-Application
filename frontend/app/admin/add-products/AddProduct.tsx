@@ -36,7 +36,6 @@ const AddProduct = () => {
             description: "",
             price: "",
             brand: "",
-            category: "",
             inStock: false,
             images: [],
         }
@@ -150,29 +149,11 @@ const AddProduct = () => {
             />
             <Checkbox id="inStock" register={register} label="This product is in stock" />
             <div className="w-full font-medium">
-                <div className="mb-2 font-semibold">Select a Category</div>
-                <div className="grid grid-cols-2 gap-3 md:grid-cols-3 max-h-[50vh] overflow-y-auto">
-                    {categories.map((item) => {
-                        if (item.label === 'All') {
-                            return null;
-                        }
-                        return (
-                            <div key={item.label} className="col-span">
-                                <CategoryInput
-                                    onClick={() => setCustomValue('category', item.label)}
-                                    selected={category === item.label}
-                                    label={item.label}
-                                    icon={item.icon}
-                                />
-                            </div>
-                        );
-                    })}
-                </div>
                 <div className="pt-6">
-                    <div className="font-bold">
+                    <div className="font-bold py-3">
                         Select the available product and upload their images
                     </div>
-                    <div className="pt-6">
+                    <div className="pt-4">
                         <SelectImage handleFileChange={addImageToState} />
                         <div className="flex flex-wrap gap-2 mt-2">
                             {images.map((item, index) => (

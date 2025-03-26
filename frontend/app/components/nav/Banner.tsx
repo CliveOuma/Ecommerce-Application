@@ -6,7 +6,7 @@ import { FiPhone } from 'react-icons/fi';
 
 const Banner = () => {
   return (
-    <div className="bg-gray-800 text-white text-center p-2 overflow-hidden">
+    <div className="bg-gray-800 text-white text-center p-1 overflow-hidden">
       <motion.div
         initial={{ x: '-100%' }}
         animate={{ x: '100%' }}

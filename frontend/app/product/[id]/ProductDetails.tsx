@@ -3,7 +3,7 @@
 import { useCallback, useState, useEffect } from "react";
 import { MdCheckCircle } from "react-icons/md";
 import { useRouter } from "next/navigation";
-import Button from "@/app/components/Button"; 
+import Button from "@/app/components/Button";
 import SetQuantity from "@/app/components/products/SetQuantity";
 import ProductImage from "@/app/components/ProductImage";
 import { useCart } from "@/hooks/useCart";
@@ -49,13 +49,19 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 description: product.description,
                 brand: product.brand,
                 category: product.category,
-                selectedImg: { ...product.images[0] },
+                selectedImg: {
+                    color: product.images[0]?.color || "Unknown",
+                    colorCode: product.images[0]?.colorCode || "#000",
+                    image: product.images[0]?.public_id
+                        ? `${process.env.NEXT_PUBLIC_CLOUDINARY_API_URL}/${product.images[0].public_id}`
+                        : "", 
+                },
                 quantity: 1,
                 price: product.price,
             });
         }
     }, [product]);
-
+    
     useEffect(() => {
         setIsProductInCart(false);
 
@@ -101,7 +107,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
             \nCategory: ${cartProduct.category}
             \nQuantity: ${cartProduct.quantity}
             \nPrice: $${cartProduct.price}`;
-            
+
             const encodedMessage = encodeURIComponent(message);
             window.location.href = `https://wa.me/+254740719423?text=${encodedMessage}`;
         }
@@ -112,7 +118,7 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
     }
 
     const productRating =
-        product.reviews.length > 0
+        Array.isArray(product.reviews) && product.reviews.length > 0
             ? product.reviews.reduce((acc: number, item: any) => acc + item.rating, 0) /
               product.reviews.length
             : 0;
@@ -124,17 +130,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                 <h1 className="text-3xl font-medium text-slate-700">{product.name}</h1>
                 <div className="flex items-center gap-2">
                     <Rating value={productRating} readOnly />
-                    <div>{product.reviews.length} reviews</div>
+                    <div>{Array.isArray(product.reviews) ? product.reviews.length : 0} reviews</div>
                 </div>
                 <Horizontal />
                 <div className="text-justify">{product.description}</div>
                 <Horizontal />
-                <div>
-                    <span className="font-semibold">CATEGORY:</span> {product.category}
-                </div>
-                <div>
-                    <span className="font-semibold">BRAND:</span> {product.brand}
-                </div>
                 <div className={product.inStock ? "text-teal-400" : "text-rose-400"}>
                     {product.inStock ? "In stock" : "out of stock"}
                 </div>
@@ -167,8 +167,11 @@ const ProductDetails: React.FC<ProductDetailsProps> = ({ product }) => {
                             <Button label="Add To Cart" onClick={handleAddToCart} />
                         </div>
                         <div className="max-w-[300px] cursor-pointer">
-                        <Button label="Order via WhatsApp" onClick={handleWhatsAppOrder} 
-                        custom="bg-green-500 hover:bg-green-600 text-white"/>
+                            <Button
+                                label="Order via WhatsApp"
+                                onClick={handleWhatsAppOrder}
+                                custom="bg-green-500 hover:bg-green-600 text-white"
+                            />
                         </div>
                     </>
                 )}

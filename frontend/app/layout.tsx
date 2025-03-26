@@ -15,6 +15,7 @@ const poppins = Poppins({ subsets: ["latin"], weight: ["400", "700"] });
 export const metadata: Metadata = {
   title: "Ecommerce Website",
   description: "Ecommerce App",
+  icons: { icon: "/laptop.png" },
 };
 
 export default async function RootLayout({

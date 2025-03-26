@@ -1,7 +1,6 @@
 'use client';
 
 import React, { useState } from 'react';
-import Categories from './Categories';
 import { FaBars } from 'react-icons/fa';
 
 const ToggleMenu: React.FC = () => {
@@ -21,9 +20,6 @@ const ToggleMenu: React.FC = () => {
       </button>
       {isMenuOpen && (
         <div className="absolute left-0 w-full bg-white mt-2 shadow-md z-20">
-          <div className="flex flex-col items-start">
-            <Categories />
-          </div>
         </div>
       )}
     </div>

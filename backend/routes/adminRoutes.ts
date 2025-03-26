@@ -1,7 +1,6 @@
 import { Router } from 'express';
 import { requireAdmin } from '../middleware/authMiddleware';
-import { getProductCount } from '../controllers/productController';
-import { getOrderSummary, getUserCount } from '../controllers/adminController';
+import { getOrderSummary, getProductCount, getUserCount } from '../controllers/adminController';
 
 const router = Router();
 

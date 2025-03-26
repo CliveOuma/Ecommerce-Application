@@ -18,10 +18,8 @@ const CartClient = () => {
         setIsLoading(true);
 
         try {
-            // Simulate an API call or some async operation
             await new Promise((resolve) => setTimeout(resolve, 1000));
 
-            // Redirect to the checkout page
             router.push('/checkout');
         } catch (error) {
             console.error("Checkout failed", error);
@@ -33,11 +31,11 @@ const CartClient = () => {
     if (!cartProducts || cartProducts.length === 0) {
         return (
             <div className="flex mt-28 flex-col items-center text-center px-4">
-                <div className="text-2xl font-semibold">
+                <div className="text-2xl mt-10 font-semibold">
                     Your cart is empty
                 </div>
                 <div className="mt-4">
-                    <Link href="/" className="text-red-500 flex items-center gap-1 mt-2">
+                    <Link href="/" className="text-red-500 mt-2 flex items-center gap-1">
                         <MdArrowBack />
                         <span>Start Shopping</span>
                     </Link>

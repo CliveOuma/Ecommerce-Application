@@ -78,30 +78,24 @@ export const getProducts = async (req: Request, res: Response) => {
     res.status(500).send({ message: 'Error fetching products' });
   }
 };
+
 export const getProductById = async (req: Request, res: Response) => {
   const { id } = req.params;
 
   if (!id || !mongoose.Types.ObjectId.isValid(id)) {
-    return res.status(400).send({ message: 'Invalid Product ID' });
+      return res.status(400).json({ message: "Invalid Product ID" });
   }
 
   try {
-    const product = await Product.findById(id);
-    if (!product) {
-      return res.status(404).send({ message: 'Product not found' });
-    }
-    res.status(200).send(product);
+      const product = await Product.findById(id);
+      if (!product) {
+          return res.status(404).json({ message: "Product not found" });
+      }
+
+      res.status(200).json(product);
   } catch (error) {
-    res.status(500).send({ message: 'Error fetching product' });
+      console.error("Error fetching product:", error);
+      res.status(500).json({ message: "Server error fetching product" });
   }
 };
 
-export const getProductCount = async (req: Request, res: Response) => {
-  try {
-    const productCount = await Product.countDocuments();
-    res.status(200).json({ count: productCount });
-  } catch (error) {
-    console.error('Error fetching product count:', error);
-    res.status(500).json({ message: 'Error fetching product count' });
-  }
-};
