@@ -44,7 +44,7 @@ const SearchBar = () => {
                     className="text-2xl cursor-pointer"
                 />
             </div>
-            <div className={`absolute top-10 ml-10 px-6 w-full ${isSearchVisible ? 'block' : 'hidden'} lg:static
+            <div className={`absolute top-10 ml-6 px-6 w-full ${isSearchVisible ? 'block' : 'hidden'} lg:static
              lg:flex lg:items-center`}>
                 <div className="flex items-center border-gray-800 rounded-md justify-center lg:justify-start">
                     <input
@@ -56,11 +56,8 @@ const SearchBar = () => {
                         autoComplete="off"
                         type="text"
                     />
-                    <button 
-                        onClick={handleSubmit(onSubmit)} 
-                        className="bg-gray-700 hover:opacity-80 text-white p-2 rounded-r-md"
-                    >
-                        Search
+                    <button onClick={handleSubmit(onSubmit)} className="py-3 px-2 bg-gray-700 text-white rounded-r-md">
+                        <AiOutlineSearch className="text-xl" />
                     </button>
                 </div>
             </div>
